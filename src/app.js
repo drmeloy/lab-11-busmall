@@ -1,5 +1,6 @@
 import { productData } from './api.js';
 import { ProductArray } from './array.js';
+import { compare } from './compare.js';
 
 const productImages = document.querySelectorAll('img');
 const productSelectors = document.querySelectorAll('input');
@@ -11,6 +12,34 @@ let selectionsRemaining = 25;
 let randomProduct1;
 let randomProduct2;
 let randomProduct3;
+let shownArray = [];
+let selectedArray = [];
+
+const incrementShown = (shownArray, itemID) => {
+    let shown = compare(shownArray, itemID);
+    if (!shown){
+        shown = {
+            id: itemID,
+            timesShown: 1
+        };
+        shownArray.push(shown);
+    } else {
+        shown.timesShown++;
+    }
+};
+
+const incrementSelected = (selectedArray, choiceID) => {
+    let selected = compare(selectedArray, choiceID);
+    if (!selected){
+        selected = {
+            id: choiceID,
+            timesSelected: 1
+        };
+        selectedArray.push(selected);
+    } else {
+        selected.timesSelected++;
+    }
+};
 
 const populateOptions = () => {
     randomProduct1 = allProducts.getRandomProduct();
@@ -23,6 +52,10 @@ const populateOptions = () => {
     while (randomProduct2 === randomProduct3) {
         randomProduct2 = allProducts.getRandomProduct();
     }
+
+    [randomProduct1, randomProduct2, randomProduct3].forEach (product => {
+        incrementShown(shownArray, product.id);
+    });
 };
 
 const populateValues = () => {
@@ -73,5 +106,16 @@ const generate = () => {
     populateNames();
     populateImages();
 };
+
+productSelectors.forEach((input) => {
+    input.addEventListener('click', (event) => {
+        incrementSelected(selectedArray, event.target.value);
+        selectionsRemaining--;
+        generate();
+        console.log(shownArray);
+        console.log(selectedArray);
+        console.log(selectionsRemaining);
+    });
+});
 
 generate();

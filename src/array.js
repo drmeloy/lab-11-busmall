@@ -8,7 +8,8 @@ export class ProductArray {
     }
 
     getRandomProduct() {
-        const randomProduct = this.products[(Math.floor(Math.random() * this.products.length))];
+        const randomNumber = Math.floor(Math.random() * this.products.length);
+        const randomProduct = this.products[randomNumber];
         return randomProduct;
     }
 

@@ -35,7 +35,7 @@ export const productData = [
         name: 'Curvy red chair'
     },
     {
-        id: 'cthulhu'
+        id: 'cthulhu',
         img: '../assets/img/cthulhu.jpg',
         name: 'Cthulhu figurine'
     },

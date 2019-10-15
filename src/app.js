@@ -112,9 +112,6 @@ productSelectors.forEach((input) => {
         incrementSelected(selectedArray, event.target.value);
         selectionsRemaining--;
         generate();
-        console.log(shownArray);
-        console.log(selectedArray);
-        console.log(selectionsRemaining);
     });
 });
 

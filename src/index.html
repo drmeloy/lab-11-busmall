@@ -11,37 +11,38 @@
 </head>
 
 <body>
-<header>
-    <h1>Product Interest Survey</h1>
-</header>
-<section id="explanation">
-    <p>
-        Thank you for taking the time to participate in our product interest survey. For the next few minutes you will be randomly shown some of our available products. Of the three you are shown, please click on the one you would be most interested in buying. You will have a total of 25 selections. After completing the survey you will be shown the data that you have contributed to BusMall!
-    </p>
-</section>
-<section id="survey-section">
-    <h2>Select your product of choice below</h2>
-        <label class="product1">
-            <input type="radio" name="product" value="">
-            <img src="">
-            <p class="product-name"></p>
-        </label>
-        <label class="product2">
-            <input type="radio" name="product" value="">
-            <img src="">
-            <p class="product-name"></p>
-        </label>
-        <label class="product3">
-            <input type="radio" name="product" value="">
-            <img src="">
-            <p class="product-name"></p>
-        </label>
-    <div id="results" class="hidden">
+    <header>
+        <h1>Product Interest Survey</h1>
+    </header>
+    <section id="explanation">
+        <p>
+            Thank you for taking the time to participate in our product interest survey. For the next few minutes you will be randomly shown some of our available products. Of the three you are shown, please click on the one you would be most interested in buying. You will have a total of 25 selections. After completing the survey you will be shown the data that you have contributed to BusMall!
+        </p>
+    </section>
+    <section id="survey-section">
+        <h2>Select your product of choice below</h2>
+            <label class="product1">
+                <input type="radio" name="product" value="">
+                <img src="">
+                <p class="product-name"></p>
+            </label>
+            <label class="product2">
+                <input type="radio" name="product" value="">
+                <img src="">
+                <p class="product-name"></p>
+            </label>
+            <label class="product3">
+                <input type="radio" name="product" value="">
+                <img src="">
+                <p class="product-name"></p>
+            </label>
+    </section>
+    <br>
+    <section class="counter">Selections remaining: <span id="counter"></span></section>
+    <section id="results" class="hidden">
         <h2>Thank you for completing our product survey! Here is your data:</h2>
 
-    </div>
-</section>
-
+    </section>
 
     <script type="module" src="app.js"></script>
 </body>

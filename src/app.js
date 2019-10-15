@@ -2,18 +2,26 @@ import { productData } from './api.js';
 import { ProductArray } from './array.js';
 import { compare } from './compare.js';
 
+const counter = document.getElementById('counter');
+const explanationSection = document.getElementById('explanation');
+const surveySection = document.getElementById('survey-section');
+const resultsSection = document.getElementById('results');
 const productImages = document.querySelectorAll('img');
 const productSelectors = document.querySelectorAll('input');
 const productNames = document.querySelectorAll('p.product-name');
 const allProducts = new ProductArray(productData);
 
 let selectionsRemaining = 25;
+counter.textContent = selectionsRemaining;
 
 let randomProduct1;
 let randomProduct2;
 let randomProduct3;
 let shownArray = [];
 let selectedArray = [];
+let previousProduct1;
+let previousProduct2;
+let previousProduct3;
 
 const incrementShown = (shownArray, itemID) => {
     let shown = compare(shownArray, itemID);
@@ -41,7 +49,7 @@ const incrementSelected = (selectedArray, choiceID) => {
     }
 };
 
-const populateOptions = () => {
+const assignOptions = () => {
     randomProduct1 = allProducts.getRandomProduct();
     randomProduct2 = allProducts.getRandomProduct();
     randomProduct3 = allProducts.getRandomProduct();
@@ -52,10 +60,35 @@ const populateOptions = () => {
     while (randomProduct2 === randomProduct3) {
         randomProduct2 = allProducts.getRandomProduct();
     }
+};
 
+const checkPrevious = () => {
+    while (randomProduct1 === previousProduct1 || randomProduct1 === previousProduct2 || randomProduct1 === previousProduct3){
+        randomProduct1 = allProducts.getRandomProduct();
+    }
+    while (randomProduct2 === previousProduct1 || randomProduct2 === previousProduct2 || randomProduct2 === previousProduct3){
+        randomProduct2 = allProducts.getRandomProduct();
+    }
+    while (randomProduct3 === previousProduct1 || randomProduct3 === previousProduct2 || randomProduct3 === previousProduct3){
+        randomProduct3 = allProducts.getRandomProduct();
+    }
+    while (randomProduct1 === randomProduct2 || randomProduct1 === randomProduct3) {
+        randomProduct1 = allProducts.getRandomProduct();
+    }
+    while (randomProduct2 === randomProduct3) {
+        randomProduct2 = allProducts.getRandomProduct();
+    }
+};
+
+const populateOptions = () => {
+    assignOptions();
+    checkPrevious();
     [randomProduct1, randomProduct2, randomProduct3].forEach (product => {
         incrementShown(shownArray, product.id);
     });
+    previousProduct1 = randomProduct1;
+    previousProduct2 = randomProduct2;
+    previousProduct3 = randomProduct3;
 };
 
 const populateValues = () => {
@@ -105,12 +138,25 @@ const generate = () => {
     populateValues();
     populateNames();
     populateImages();
+    console.log(shownArray);
+    console.log(selectedArray);
+};
+
+const swapPage = () => {
+    explanationSection.classList.add('hidden');
+    surveySection.classList.add('hidden');
+    resultsSection.classList.remove('hidden');
 };
 
 productSelectors.forEach((input) => {
     input.addEventListener('click', (event) => {
         incrementSelected(selectedArray, event.target.value);
         selectionsRemaining--;
+        if (selectionsRemaining < 1){
+            swapPage();
+            return;
+        }
+        counter.textContent = selectionsRemaining;
         generate();
     });
 });

@@ -63,7 +63,7 @@ input {
     display: none;
 }
 
-#explanation.hidden, #survey-section.hidden {
+#explanation.hidden, #survey-section.hidden, #counter-container.hidden {
     display: none;
 }
 

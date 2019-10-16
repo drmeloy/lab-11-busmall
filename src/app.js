@@ -1,11 +1,13 @@
 import { productData } from './api.js';
 import { ProductArray } from './array.js';
 import { compare } from './compare.js';
+import { findResults } from './results.js';
 
 const counter = document.getElementById('counter');
+const counterContainer = document.getElementById('counter-container');
 const explanationSection = document.getElementById('explanation');
 const surveySection = document.getElementById('survey-section');
-const resultsSection = document.getElementById('results');
+const resultsSection = document.getElementById('results-section');
 const productImages = document.querySelectorAll('img');
 const productSelectors = document.querySelectorAll('input');
 const productNames = document.querySelectorAll('p.product-name');
@@ -17,17 +19,18 @@ counter.textContent = selectionsRemaining;
 let randomProduct1;
 let randomProduct2;
 let randomProduct3;
-let shownArray = [];
-let selectedArray = [];
 let previousProduct1;
 let previousProduct2;
 let previousProduct3;
+let shownArray = [];
+let selectedArray = [];
 
-const incrementShown = (shownArray, itemID) => {
+const incrementShown = (shownArray, itemID, itemName) => {
     let shown = compare(shownArray, itemID);
     if (!shown){
         shown = {
             id: itemID,
+            name: itemName,
             timesShown: 1
         };
         shownArray.push(shown);
@@ -36,11 +39,12 @@ const incrementShown = (shownArray, itemID) => {
     }
 };
 
-const incrementSelected = (selectedArray, choiceID) => {
+const incrementSelected = (selectedArray, choiceID, choiceName) => {
     let selected = compare(selectedArray, choiceID);
     if (!selected){
         selected = {
             id: choiceID,
+            name: choiceName,
             timesSelected: 1
         };
         selectedArray.push(selected);
@@ -84,7 +88,7 @@ const populateOptions = () => {
     assignOptions();
     checkPrevious();
     [randomProduct1, randomProduct2, randomProduct3].forEach (product => {
-        incrementShown(shownArray, product.id);
+        incrementShown(shownArray, product.id, product.name);
     });
     previousProduct1 = randomProduct1;
     previousProduct2 = randomProduct2;
@@ -133,10 +137,11 @@ const populateImages = () => {
     });
 };
 
-const generate = () => {
+const generateChoices = () => {
     populateOptions();
     populateValues();
     populateNames();
+    // debugger;
     populateImages();
     console.log(shownArray);
     console.log(selectedArray);
@@ -145,20 +150,39 @@ const generate = () => {
 const swapPage = () => {
     explanationSection.classList.add('hidden');
     surveySection.classList.add('hidden');
+    counterContainer.classList.add('hidden');
     resultsSection.classList.remove('hidden');
+};
+
+const makeResultLine = (result) => {
+    const li = document.createElement('li');
+    li.textContent = result;
+    return li;
+};
+
+const generateData = () => {
+    const resultsArray = findResults(shownArray, selectedArray);
+    const ul = document.createElement('ul');
+    resultsSection.appendChild(ul);
+    resultsArray.forEach(result => {
+        const li = makeResultLine(result);
+        ul.appendChild(li);
+    });
 };
 
 productSelectors.forEach((input) => {
     input.addEventListener('click', (event) => {
-        incrementSelected(selectedArray, event.target.value);
+        const prodName = document.querySelector('input:checked ~ p').textContent;
+        incrementSelected(selectedArray, event.target.value, prodName);
         selectionsRemaining--;
         if (selectionsRemaining < 1){
             swapPage();
+            generateData();
             return;
         }
         counter.textContent = selectionsRemaining;
-        generate();
+        generateChoices();
     });
 });
 
-generate();
+generateChoices();

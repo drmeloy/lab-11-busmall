@@ -1,6 +1,6 @@
 import { compare } from '../src/compare.js';
 import { productData } from '../src/api.js';
-import { findResults } from '../src/results.js';
+import { notifyResults } from '../src/results.js';
 
 const test = QUnit.test;
 
@@ -20,7 +20,7 @@ test('compare returns the product with the id that matches the provided product 
     assert.deepEqual(product, expected);
 });
 
-test('findResults returns an array with survey product results and statistics', assert => {
+test('notifyResults returns an array with survey product results and statistics', assert => {
     const shownArray = [
         { id: 'shark', name: 'Shark Sleeping Bag', timesShown: 2 },
         { id: 'bag', name: 'R2-D2 Suitcase', timesShown: 9 },
@@ -43,7 +43,7 @@ test('findResults returns an array with survey product results and statistics', 
         'You selected the Dragon Meat 3 out of 4 times; 75%.'
     ];
     
-    const results = findResults(shownArray, selectedArray);
+    const results = notifyResults(shownArray, selectedArray);
     
     assert.deepEqual(results, expected);
 });

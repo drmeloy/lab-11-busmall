@@ -2,11 +2,17 @@ body {
     margin: 1% 10%;
     display: flex;
     flex-direction: column;
+    background: coral;
 }
 
 header {
     display: flex;
     justify-content: center;
+    background: wheat;
+    border: 1px solid black;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 header h1 {
@@ -17,12 +23,20 @@ header h1 {
     display: flex;
     justify-content: center;
     text-align: center;
+    background: wheat;
+    border: 1px solid black;
+    border-top: none;
 }
 
 #survey-section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     height: 500px;
+    background: lightgreen;
+    border: 1px solid black;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #survey-section h2 {
@@ -30,6 +44,7 @@ header h1 {
     grid-row: 1/2;
     text-align: center;
     margin: 0;
+
 }
 
 #survey-section label {
@@ -54,13 +69,28 @@ label.product3 {
     grid-row: 2/3;
 }
 
+label p {
+    background: lightskyblue;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
 img {
     width: 250px;
     height: auto;
+    border: 1px solid black;
 }
 
 input {
     display: none;
+}
+
+#counter-container {
+    background: wheat;
+    width: 210px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
 }
 
 #explanation.hidden, #survey-section.hidden, #counter-container.hidden {

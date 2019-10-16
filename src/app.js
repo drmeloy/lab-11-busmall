@@ -3,7 +3,7 @@ import { ProductArray } from './array.js';
 import { compare } from './compare.js';
 import { notifyResults } from './results.js';
 import { resultsForStorage, obtainLocalStorage, updateLocalStorage, setLocalStorage } from './storage.js';
-import { generateSessionChart, generateOverallChart } from './chart.js';
+import { generateChart } from './chart.js';
 
 const counter = document.getElementById('counter');
 const counterContainer = document.getElementById('counter-container');
@@ -193,8 +193,8 @@ productSelectors.forEach((input) => {
             doStorageThings();
             const resultsArray = resultsForStorage(shownArray, selectedArray);
             const localStorageArray = obtainLocalStorage();
-            generateSessionChart(sessionChart, resultsArray);
-            generateOverallChart(overallChart, localStorageArray);
+            generateChart(sessionChart, resultsArray);
+            generateChart(overallChart, localStorageArray);
             return;
         }
         counter.textContent = selectionsRemaining;

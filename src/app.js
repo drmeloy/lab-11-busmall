@@ -15,8 +15,8 @@ const productImages = document.querySelectorAll('img');
 const productSelectors = document.querySelectorAll('input');
 const productNames = document.querySelectorAll('p.product-name');
 const chartsSection = document.getElementById('charts');
-const sessionChart = document.getElementById('session-chart');
-const overallChart = document.getElementById('overall-chart');
+const sessionChart = document.getElementById('session-chart').getContext('2d');
+const overallChart = document.getElementById('overall-chart').getContext('2d');
 const allProducts = new ProductArray(productData);
 
 let selectionsRemaining = 25;
@@ -192,7 +192,7 @@ productSelectors.forEach((input) => {
             generateData();
             doStorageThings();
             const resultsArray = resultsForStorage(shownArray, selectedArray);
-            generateSessionChart(resultsArray);
+            generateSessionChart(sessionChart, resultsArray);
             return;
         }
         counter.textContent = selectionsRemaining;

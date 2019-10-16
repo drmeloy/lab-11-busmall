@@ -1,4 +1,4 @@
-export const generateSessionChart = (resultsArray) => {
+export const generateSessionChart = (chartLocation, resultsArray) => {
     let labels = [];
     resultsArray.forEach(item => {
         let label;
@@ -22,7 +22,7 @@ export const generateSessionChart = (resultsArray) => {
 
     const backgroundColors = ['lightgreen', 'lightskyblue'];
     
-    new Chart(sessionChart, {
+    const chart = new Chart(chartLocation, {
         type: 'bar',
         data: {
             labels: labels,
@@ -42,4 +42,5 @@ export const generateSessionChart = (resultsArray) => {
             }
         }
     });
+    return chart;
 };

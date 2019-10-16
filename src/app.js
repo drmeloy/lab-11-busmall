@@ -9,6 +9,7 @@ const counterContainer = document.getElementById('counter-container');
 const explanationSection = document.getElementById('explanation');
 const surveySection = document.getElementById('survey-section');
 const resultsSection = document.getElementById('results-section');
+const headerSection = document.getElementById('header');
 const productImages = document.querySelectorAll('img');
 const productSelectors = document.querySelectorAll('input');
 const productNames = document.querySelectorAll('p.product-name');
@@ -146,6 +147,7 @@ const generateChoices = () => {
 };
 
 const swapPage = () => {
+    headerSection.classList.add('hidden');
     explanationSection.classList.add('hidden');
     surveySection.classList.add('hidden');
     counterContainer.classList.add('hidden');

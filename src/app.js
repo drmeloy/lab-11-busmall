@@ -172,13 +172,9 @@ const generateData = () => {
 
 const doStorageThings = () => {
     const resultsArray = resultsForStorage(shownArray, selectedArray);
-    debugger;
     const storageArray = obtainLocalStorage();
-    debugger;
     const updatedStorageArray = updateLocalStorage(resultsArray, storageArray);
-    debugger;
     setLocalStorage(updatedStorageArray);
-    debugger;
 };
 
 productSelectors.forEach((input) => {

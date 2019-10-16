@@ -1,3 +1,5 @@
+import { compare } from './compare.js';
+
 export const obtainLocalStorage = () => {
     let json = localStorage.getItem('results-data');
     let storageArray;
@@ -10,23 +12,22 @@ export const obtainLocalStorage = () => {
 };
 
 export const updateLocalStorage = (resultsArray, storageArray) => {
-    let dataItem;
     resultsArray.forEach(result => {
-        storageArray.forEach(item => {
-            if (result.id === item.id){
-                item.timesSelected += result.timesSelected;
-                item.timesShown += result.timesShown;
-            } else {
-                dataItem = {
-                    id: result.id, 
-                    name: result.name, 
-                    timesSelected: result.timesSelected, 
-                    timesShown: result.timesShown
-                };
-                storageArray.push(dataItem);
-            }
-        });
+        let match = compare(storageArray, result.id);
+        if (!match){
+            match = {
+                id: result.id,
+                name: result.name,
+                timesSelected: result.timesSelected,
+                timesShown: result.timesShown
+            };
+            storageArray.push(match);
+        } else {
+            match.timesSelected += result.timesSelected;
+            match.timesShown += result.timesShown;
+        }
     });
+    return storageArray;
 };
 
 export const setLocalStorage = (storageArray) => {

@@ -2,6 +2,7 @@ import { productData } from './api.js';
 import { ProductArray } from './array.js';
 import { compare } from './compare.js';
 import { notifyResults } from './results.js';
+import { resultsForStorage, obtainLocalStorage, updateLocalStorage, setLocalStorage } from './storage.js';
 
 const counter = document.getElementById('counter');
 const counterContainer = document.getElementById('counter-container');
@@ -141,10 +142,7 @@ const generateChoices = () => {
     populateOptions();
     populateValues();
     populateNames();
-    // debugger;
     populateImages();
-    console.log(shownArray);
-    console.log(selectedArray);
 };
 
 const swapPage = () => {
@@ -170,6 +168,17 @@ const generateData = () => {
     });
 };
 
+const doStorageThings = () => {
+    const resultsArray = resultsForStorage(shownArray, selectedArray);
+    debugger;
+    const storageArray = obtainLocalStorage();
+    debugger;
+    const updatedStorageArray = updateLocalStorage(resultsArray, storageArray);
+    debugger;
+    setLocalStorage(updatedStorageArray);
+    debugger;
+};
+
 productSelectors.forEach((input) => {
     input.addEventListener('click', (event) => {
         const prodName = document.querySelector('input:checked ~ p').textContent;
@@ -178,6 +187,7 @@ productSelectors.forEach((input) => {
         if (selectionsRemaining < 1){
             swapPage();
             generateData();
+            doStorageThings();
             return;
         }
         counter.textContent = selectionsRemaining;

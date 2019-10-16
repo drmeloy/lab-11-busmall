@@ -13,31 +13,35 @@ export const generateSessionChart = (chartLocation, resultsArray) => {
         shownData.push(data);
     });
 
-    let clickedData = [];
+    let selectedData = [];
     resultsArray.forEach(item => {
         let data;
-        data = item.timesClicked;
-        clickedData.push(data);
+        data = item.timesSelected;
+        selectedData.push(data);
     });
-
-    const backgroundColors = ['lightgreen', 'lightskyblue'];
     
     const chart = new Chart(chartLocation, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [{
-                label: '# of Votes',
-                data: shownData, clickedData,
-                backgroundColor: backgroundColors
+                label: 'Times product selected',
+                data: selectedData,
+                backgroundColor: 'skyblue',
+                type: 'bar'
+            }, {
+                label: 'Times product shown',
+                data: shownData,
+                backgroundColor: 'lightgreen'
             }]
         },
         options: {
             scales: {
+                xAxes: [{
+                    stacked: true
+                }],
                 yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
+                    stacked: true
                 }]
             }
         }

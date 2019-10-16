@@ -3,6 +3,7 @@ import { ProductArray } from './array.js';
 import { compare } from './compare.js';
 import { notifyResults } from './results.js';
 import { resultsForStorage, obtainLocalStorage, updateLocalStorage, setLocalStorage } from './storage.js';
+import { generateSessionChart } from './chart.js';
 
 const counter = document.getElementById('counter');
 const counterContainer = document.getElementById('counter-container');
@@ -13,6 +14,9 @@ const headerSection = document.getElementById('header');
 const productImages = document.querySelectorAll('img');
 const productSelectors = document.querySelectorAll('input');
 const productNames = document.querySelectorAll('p.product-name');
+const chartsSection = document.getElementById('charts');
+const sessionChart = document.getElementById('session-chart');
+const overallChart = document.getElementById('overall-chart');
 const allProducts = new ProductArray(productData);
 
 let selectionsRemaining = 25;
@@ -152,6 +156,7 @@ const swapPage = () => {
     surveySection.classList.add('hidden');
     counterContainer.classList.add('hidden');
     resultsSection.classList.remove('hidden');
+    chartsSection.classList.remove('hidden');
 };
 
 const makeResultLine = (result) => {
@@ -186,6 +191,8 @@ productSelectors.forEach((input) => {
             swapPage();
             generateData();
             doStorageThings();
+            const resultsArray = resultsForStorage(shownArray, selectedArray);
+            generateSessionChart(resultsArray);
             return;
         }
         counter.textContent = selectionsRemaining;

@@ -38,10 +38,14 @@ export const generateSessionChart = (chartLocation, resultsArray) => {
         options: {
             scales: {
                 xAxes: [{
-                    stacked: true
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }],
                 yAxes: [{
-                    stacked: true
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }]
             }
         }

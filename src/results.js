@@ -1,4 +1,4 @@
-export const findResults = (shownArray, selectedArray) => {
+export const notifyResults = (shownArray, selectedArray) => {
     let resultsArray = [];
     shownArray.forEach(shown => {
         selectedArray.forEach(selected => {

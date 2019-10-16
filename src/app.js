@@ -1,7 +1,7 @@
 import { productData } from './api.js';
 import { ProductArray } from './array.js';
 import { compare } from './compare.js';
-import { findResults } from './results.js';
+import { notifyResults } from './results.js';
 
 const counter = document.getElementById('counter');
 const counterContainer = document.getElementById('counter-container');
@@ -161,7 +161,7 @@ const makeResultLine = (result) => {
 };
 
 const generateData = () => {
-    const resultsArray = findResults(shownArray, selectedArray);
+    const resultsArray = notifyResults(shownArray, selectedArray);
     const ul = document.createElement('ul');
     resultsSection.appendChild(ul);
     resultsArray.forEach(result => {

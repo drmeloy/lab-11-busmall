@@ -12,7 +12,7 @@ test('compare returns the product with the id that matches the provided product 
     const expected = {
         id: 'bag',
         img: '../assets/img/bag.jpg',
-        name: 'R2-D2 suitcase',
+        name: 'R2-D2 Suitcase',
     };
     
     const product = compare(products, productID);
@@ -22,25 +22,25 @@ test('compare returns the product with the id that matches the provided product 
 
 test('findResults returns an array with survey product results and statistics', assert => {
     const shownArray = [
-        { id: 'shark', timesShown: 2 },
-        { id: 'bag', timesShown: 9 },
-        { id: 'usb', timesShown: 6 },
-        { id: 'dragon', timesShown: 4 },
-        { id: 'scissors', timesShown: 4 }
+        { id: 'shark', name: 'Shark Sleeping Bag', timesShown: 2 },
+        { id: 'bag', name: 'R2-D2 Suitcase', timesShown: 9 },
+        { id: 'usb', name: 'Tentacle USB', timesShown: 6 },
+        { id: 'dragon', name: 'Dragon Meat', timesShown: 4 },
+        { id: 'scissors', name: 'Pizza Slice Scissors', timesShown: 4 }
     ];
 
     const selectedArray = [
-        { id: 'bag', timesSelected: 3 },
-        { id: 'usb', timesSelected: 2 },
-        { id: 'breakfast', timesSelected: 2 },
-        { id: 'dragon', timesSelected: 3 },
-        { id: 'cthulhu', timesSelected: 1 }
+        { id: 'bag', name: 'R2-D2 Suitcase', timesSelected: 3 },
+        { id: 'usb', name: 'Tentacle USB', timesSelected: 2 },
+        { id: 'breakfast', name: 'All-In-One Breakfast Maker', timesSelected: 2 },
+        { id: 'dragon', name: 'Dragon Meat', timesSelected: 3 },
+        { id: 'cthulhu', name: 'Cthulhu Figurine', timesSelected: 1 }
     ];
 
     const expected = [
-        'You selected the bag 3 out of 9 times; 33%.',
-        'You selected the usb 2 out of 6 times; 33%.',
-        'You selected the dragon 3 out of 4 times; 75%.'
+        'You selected the R2-D2 Suitcase 3 out of 9 times; 33%.',
+        'You selected the Tentacle USB 2 out of 6 times; 33%.',
+        'You selected the Dragon Meat 3 out of 4 times; 75%.'
     ];
     
     const results = findResults(shownArray, selectedArray);
